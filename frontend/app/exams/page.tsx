@@ -3,12 +3,9 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Bell,
   Briefcase,
-  Calculator,
   CheckCircle2,
   FileText,
-  GraduationCap,
   ShieldCheck,
   Target,
   Trophy,
@@ -50,48 +47,6 @@ const accentStyles: Record<string, string> = {
 export default function ExamsPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-blue-500/30">
-      {/* SLIM RIBBON (MATCH HOMEPAGE) */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/10 bg-[#050505]/80">
-        <div className="max-w-[1400px] mx-auto px-6 h-16 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2.5 group cursor-pointer flex-shrink-0">
-            <div className="bg-blue-600 p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
-              <GraduationCap className="w-5 h-5" />
-            </div>
-            <span className="text-xl font-bold tracking-tighter">
-              Parho<span className="text-blue-500">Barho</span>
-            </span>
-          </Link>
-
-          <div className="hidden lg:flex gap-6 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em]">
-            <a href="#" className="hover:text-white transition-colors">
-              Universities
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Resources
-            </a>
-            <Link href="/exams" className="text-white">
-              Exams
-            </Link>
-            <a href="#" className="hover:text-white transition-colors">
-              Diplomas & Courses
-            </a>
-            <Link
-              href="/merit-calculator"
-              className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer"
-            >
-              <Calculator className="w-3.5 h-3.5" /> Merit Calculator
-            </Link>
-            <a href="#" className="flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300 transition-colors">
-              <Bell className="w-3.5 h-3.5" /> Khabarnama
-            </a>
-          </div>
-
-          <button className="hidden md:block bg-white text-black px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-wider hover:bg-blue-50 transition-colors flex-shrink-0">
-            Join Now
-          </button>
-        </div>
-      </nav>
-
       <section className="relative px-6 pt-20 pb-16 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[520px] bg-blue-600/10 blur-[150px] rounded-full -z-10" />
         <div className="max-w-6xl mx-auto">

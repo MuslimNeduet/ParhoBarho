@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { 
-  GraduationCap, Sparkles, Send, 
+  Sparkles, Send, 
   RefreshCcw, User, Bot, Info
 } from 'lucide-react';
 
@@ -28,27 +27,6 @@ export default function MeritCalculator() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex flex-col">
-      
-      {/* 1. SLIM NAV (Logo is now Clickable) */}
-      <nav className="h-16 border-b border-white/10 flex justify-between items-center px-8 bg-[#050505]/50 backdrop-blur-md sticky top-0 z-50">
-        <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-          <div className="bg-blue-600 p-1.5 rounded-lg group-hover:rotate-12 transition-transform">
-            <GraduationCap className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tighter">
-            Parho<span className="text-blue-500">Barho</span>
-          </span>
-        </Link>
-        <div className="flex items-center gap-6">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
-                Merit AI v2.0
-            </span>
-            <Link href="/" className="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">
-                Back to Home
-            </Link>
-        </div>
-      </nav>
-
       {/* 2. CENTERED AI INTERFACE */}
       <main className="flex-1 flex flex-col items-center justify-center p-6">
         
