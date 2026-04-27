@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, Calculator, GraduationCap } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bell, Calculator, GraduationCap, Lock } from "lucide-react";
 
 const provinces = [
   { label: "Sindh", value: "sindh" },
@@ -13,6 +14,16 @@ const provinces = [
 
 export default function Ribbon() {
   const pathname = usePathname();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("parhobarho_admin_token");
+      if (token) {
+        setIsAdmin(true);
+      }
+    }
+  }, []);
 
   const linkClass = (href: string) =>
     `hover:text-white transition-colors ${pathname === href ? "text-white" : "text-gray-400"}`;
@@ -70,6 +81,11 @@ export default function Ribbon() {
           <Link href="/khabarnama" className={`${linkClass("/khabarnama")} flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300`}>
             <Bell className="w-3.5 h-3.5" /> Khabarnama
           </Link>
+          {isAdmin && (
+            <Link href="/admin" className={`${linkClass("/admin")} flex items-center gap-1.5 text-rose-400 hover:text-rose-300 ml-4 border-l border-white/10 pl-4`}>
+              <Lock className="w-3.5 h-3.5" /> Admin Hub
+            </Link>
+          )}
         </div>
 
         <button className="hidden md:block bg-white text-black px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-wider hover:bg-blue-50 transition-colors flex-shrink-0">

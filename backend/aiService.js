@@ -27,11 +27,53 @@ function buildSystemPrompt(knowledgeEntries) {
 }
 
 export async function generateCounselorReply({ messages }) {
-  const apiKey = requireEnv("GEMINI_API_KEY");
-  const preferredModel = process.env.GEMINI_MODEL || "models/gemini-pro-latest";
-
   const knowledge = await listKnowledge({ limit: 25 });
   const system = buildSystemPrompt(knowledge);
+
+  // Check if Ollama should be used instead of Gemini
+  const useOllama = process.env.USE_OLLAMA === "true";
+
+  if (useOllama) {
+    const ollamaModel = process.env.OLLAMA_MODEL || "llama3"; // you can change this to "mistral", "phi3", etc.
+    const ollamaHost = process.env.OLLAMA_HOST || "http://127.0.0.1:11434";
+
+    // Format chat history for Ollama
+    const ollamaMessages = [
+      { role: "system", content: system }
+    ];
+
+    const userMessages = (Array.isArray(messages) ? messages : [])
+      .filter((m) => m && typeof m.content === "string" && (m.role === "user" || m.role === "assistant"))
+      .map((m) => ({ role: m.role, content: m.content }));
+      
+    ollamaMessages.push(...userMessages);
+
+    try {
+      const response = await fetch(`${ollamaHost}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: ollamaModel,
+          messages: ollamaMessages,
+          stream: false,
+          options: { temperature: 0.3 }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Ollama failed with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return { reply: data.message?.content || "No response from Ollama." };
+    } catch (err) {
+      throw new Error(`Ollama request failed: ${err?.message || err}. Make sure Ollama is running and model '${ollamaModel}' is pulled.`);
+    }
+  }
+
+  // --- GEMINI LOGIC FALLBACK ---
+  const apiKey = requireEnv("GEMINI_API_KEY");
+  const preferredModel = process.env.GEMINI_MODEL || "models/gemini-pro-latest";
 
   const history = (Array.isArray(messages) ? messages : [])
     .filter((m) => m && typeof m.content === "string" && (m.role === "user" || m.role === "assistant"))
