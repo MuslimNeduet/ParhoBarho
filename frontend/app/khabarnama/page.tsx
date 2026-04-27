@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BellRing, ExternalLink, RefreshCw } from "lucide-react";
+import { BellRing, ExternalLink, RefreshCw, Search } from "lucide-react";
 
 type NewsItem = {
   source: string;
@@ -91,6 +91,7 @@ export default function KhabarnamaPage() {
   const [data, setData] = useState<KhabarnamaPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchNews = async () => {
     setLoading(true);
@@ -160,6 +161,23 @@ export default function KhabarnamaPage() {
     return rows;
   }, [data]);
 
+  const searchResults = useMemo(() => {
+    if (!data || !searchQuery.trim()) return [];
+    
+    const query = searchQuery.toLowerCase();
+    const allItems = tickerRows.flat();
+    
+    // Dedup and filter
+    const uniqueMap = new Map();
+    for (const item of allItems) {
+      if (item.title.toLowerCase().includes(query) || item.label.toLowerCase().includes(query)) {
+        uniqueMap.set(item.link, item);
+      }
+    }
+    
+    return Array.from(uniqueMap.values());
+  }, [searchQuery, tickerRows, data]);
+
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-blue-500/30">
       <section className="relative pt-20 pb-10 px-6 overflow-hidden">
@@ -176,10 +194,26 @@ export default function KhabarnamaPage() {
               Live Education Feed
             </span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-3xl leading-relaxed">
+          <p className="text-gray-400 text-lg max-w-3xl leading-relaxed mb-6">
             Automatically tracking official updates from HEC, Board of Secondary Education, and Board of Intermediate
             Education.
           </p>
+
+          <div className="relative max-w-2xl bg-white/5 backdrop-blur-md border border-white/10 p-1.5 rounded-2xl flex items-center gap-2 group focus-within:border-indigo-500/50 transition-colors shadow-2xl">
+            <div className="flex-1 flex items-center w-full px-4">
+              <Search className="text-gray-500 w-5 h-5" />
+              <input 
+                type="text" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search updates from HEC, NUST, CSS..." 
+                className="bg-transparent w-full px-4 py-3 outline-none text-white placeholder-gray-500 text-sm"
+              />
+            </div>
+            {searchQuery && (
+               <button onClick={() => setSearchQuery("")} className="px-4 py-2 text-xs font-bold text-gray-400 hover:text-white transition-colors">Clear</button>
+            )}
+          </div>
         </div>
       </section>
 
@@ -202,14 +236,49 @@ export default function KhabarnamaPage() {
           </div>
         )}
 
-        <div className="space-y-4">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Generic (Boards + HEC + Govt)</p>
-          <NewsTickerRow items={tickerRows[0]} direction="left" secondsPerSlide={9} />
-          <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Universities</p>
-          <NewsTickerRow items={tickerRows[1]} direction="right" secondsPerSlide={9} />
-          <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Competitive Exams</p>
-          <NewsTickerRow items={tickerRows[2]} direction="left" secondsPerSlide={9} />
-        </div>
+        {searchQuery.trim().length > 0 ? (
+           <div className="space-y-6">
+             <div className="flex items-center gap-3">
+               <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Search Results for "{searchQuery}"</p>
+               <span className="px-2 py-0.5 rounded border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-bold">{searchResults.length} found</span>
+             </div>
+             
+             {searchResults.length === 0 ? (
+                <div className="rounded-[2rem] border border-white/5 bg-white/[0.02] p-12 text-center">
+                   <p className="text-gray-400 font-medium">No updates matched your search.</p>
+                </div>
+             ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                   {searchResults.map((item, index) => (
+                      <a
+                        key={`${item.link}-${index}-search`}
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group flex flex-col justify-between rounded-[1.5rem] border border-white/10 bg-[#0d0d0d] px-6 py-6 hover:border-indigo-500/40 hover:bg-indigo-500/[0.08] transition-all h-full"
+                      >
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.16em] text-indigo-400 font-black">{item.label}</p>
+                          <p className="mt-3 text-base text-gray-200 leading-snug group-hover:text-white line-clamp-4">{item.title}</p>
+                        </div>
+                        <span className="mt-5 inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.12em] font-bold text-indigo-300">
+                          Open details <ExternalLink className="w-3 h-3" />
+                        </span>
+                      </a>
+                   ))}
+                </div>
+             )}
+           </div>
+        ) : (
+          <div className="space-y-4">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Generic (Boards + HEC + Govt)</p>
+            <NewsTickerRow items={tickerRows[0]} direction="left" secondsPerSlide={9} />
+            <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Universities</p>
+            <NewsTickerRow items={tickerRows[1]} direction="right" secondsPerSlide={9} />
+            <p className="text-[10px] uppercase tracking-[0.2em] text-indigo-400 font-black">Competitive Exams</p>
+            <NewsTickerRow items={tickerRows[2]} direction="left" secondsPerSlide={9} />
+          </div>
+        )}
       </section>
       <style jsx global>{`
         @keyframes khabarnama-scroll-left {
