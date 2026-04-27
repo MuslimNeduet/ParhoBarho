@@ -66,11 +66,11 @@ export default function ProvinceUniversitiesPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full -z-10" />
         <div className="max-w-6xl mx-auto">
           <p className="text-[10px] text-blue-400 font-black tracking-[0.2em] mb-4 uppercase">{data.province} University Intelligence</p>
-          <h1 className="text-5xl md:text-7xl font-black mb-7 leading-[1.12] tracking-tight italic">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-[1.1] tracking-tighter">
             {data.province},
             <br />
-            <span className="inline-block pr-2 pb-1 not-italic bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-500 bg-clip-text text-transparent underline decoration-blue-500/30">
-              Top Institutions by Stream
+            <span className="inline-block pr-2 pb-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
+              Top Institutions
             </span>
           </h1>
           <p className="text-gray-400 text-lg max-w-3xl leading-relaxed">

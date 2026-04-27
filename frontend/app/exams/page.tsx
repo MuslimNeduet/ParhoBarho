@@ -54,10 +54,10 @@ export default function ExamsPage() {
             <ShieldCheck className="w-3 h-3" />
             National Competitive Exam Command Center
           </div>
-          <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tighter italic mb-7">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.1] tracking-tighter mb-4">
             Exams, Structured Like
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-500 bg-clip-text text-transparent underline decoration-blue-500/30">
+            <span className="inline-block pr-2 pb-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
               A High-End Career Portal
             </span>
           </h1>

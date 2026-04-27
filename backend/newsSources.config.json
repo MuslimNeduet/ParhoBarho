@@ -1,0 +1,35 @@
+{
+  "generic": [
+    { "key": "hec", "name": "HEC Pakistan", "url": "https://www.hec.gov.pk/english/news/Pages/default.aspx" },
+    { "key": "bsek", "name": "BSEK Karachi (Matric)", "url": "https://www.bsek.edu.pk/News" },
+    { "key": "biek", "name": "BIEK Karachi (Inter)", "url": "https://www.biek.edu.pk/News" },
+    { "key": "pmdc", "name": "PMDC (Medical)", "url": "https://www.pmdc.pk/News" }
+  ],
+  "universities": [
+    { "key": "neduet", "name": "NED University", "url": "https://www.neduet.edu.pk/content/news" },
+    { "key": "habib", "name": "Habib University", "url": "https://habib.edu.pk/news-and-events/" },
+    { "key": "ssuet", "name": "Sir Syed University", "url": "https://www.ssuet.edu.pk/news-events/" },
+    { "key": "pafkiet", "name": "PAF-KIET", "url": "https://kiet.edu.pk/category/news/" },
+    { "key": "iba", "name": "IBA Karachi", "url": "https://www.iba.edu.pk/news.php" },
+    { "key": "duhs", "name": "Dow University", "url": "https://www.duhs.edu.pk/category/news/" },
+    
+    { "key": "lums", "name": "LUMS", "url": "https://lums.edu.pk/news" },
+    { "key": "pu", "name": "Punjab University", "url": "https://pu.edu.pk/home/section/exam/" },
+    { "key": "uetl", "name": "UET Lahore", "url": "https://www.uet.edu.pk/news-and-events" },
+    
+    { "key": "nust", "name": "NUST Islamabad", "url": "https://nust.edu.pk/news/" },
+    { "key": "fast", "name": "FAST-NUCES", "url": "https://nu.edu.pk/News" },
+    { "key": "pieas", "name": "PIEAS", "url": "https://www.pieas.edu.pk/proclaims-grid.cshtml?type=NEWS" },
+    
+
+    { "key": "giki", "name": "GIKI Topi", "url": "https://giki.edu.pk/news-events/" },
+    { "key": "buitems", "name": "BUITEMS Quetta", "url": "https://www.buitms.edu.pk/News/" }
+  ],
+  "competitive": [
+    { "key": "fpsc", "name": "FPSC (Federal)", "url": "https://www.fpsc.gov.pk/" },
+    { "key": "ppsc", "name": "PPSC (Punjab)", "url": "https://www.ppsc.gop.pk/" },
+    { "key": "spsc", "name": "SPSC (Sindh)", "url": "https://spsc.gos.pk/" },
+    { "key": "kppsc", "name": "KPPSC (Khyber Pakhtunkhwa)", "url": "https://www.kppsc.gov.pk/" },
+    { "key": "bpsc", "name": "BPSC (Balochistan)", "url": "https://bpsc.gob.pk/" }
+  ]
+}

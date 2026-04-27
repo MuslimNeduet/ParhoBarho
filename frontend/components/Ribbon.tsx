@@ -64,12 +64,12 @@ export default function Ribbon() {
           <a href="#" className="text-gray-400 hover:text-white transition-colors">
             Diplomas & Courses
           </a>
-          <Link href="/merit-calculator" className={`${linkClass("/merit-calculator")} flex items-center gap-1.5`}>
-            <Calculator className="w-3.5 h-3.5" /> Merit Calculator
+          <Link href="/find-my-university" className={`${linkClass("/find-my-university")} flex items-center gap-1.5`}>
+            <Calculator className="w-3.5 h-3.5" /> Find My University
           </Link>
-          <a href="#" className="flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300 transition-colors">
+          <Link href="/khabarnama" className={`${linkClass("/khabarnama")} flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300`}>
             <Bell className="w-3.5 h-3.5" /> Khabarnama
-          </a>
+          </Link>
         </div>
 
         <button className="hidden md:block bg-white text-black px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-wider hover:bg-blue-50 transition-colors flex-shrink-0">

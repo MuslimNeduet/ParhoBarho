@@ -18,9 +18,9 @@ export default function Home() {
             <Globe className="w-3 h-3" /> National Career & Education Map
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[1.12] tracking-tight italic">
+          <h1 className="text-6xl md:text-8xl font-black mb-6 leading-[1.1] tracking-tighter">
             Your Future, <br />{" "}
-            <span className="inline-block pr-2 pb-1 not-italic bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-500 bg-clip-text text-transparent underline decoration-blue-500/30">
+            <span className="inline-block pr-2 pb-1 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
               Unlocked!
             </span>
           </h1>
