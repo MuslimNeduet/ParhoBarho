@@ -98,15 +98,50 @@ function normalizeText(value) {
   return value.replace(/\s+/g, " ").trim();
 }
 
+function isBeforeJan2026(text) {
+  const jan2026 = new Date("2026-01-01T00:00:00Z");
+
+  // Scan text for generic years
+  const yearPattern = /\b(20\d{2})\b/g;
+  const yearMatches = text.match(yearPattern);
+  if (yearMatches) {
+    for (const yr of yearMatches) {
+      if (parseInt(yr, 10) < 2026) {
+        return true; // Discard anything from 2025 or older
+      }
+    }
+  }
+
+  // Scan text for long formatted date like "April 15, 2025" or "12/03/2025"
+  const datePattern = /(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?[\s,]+(20\d{2})|\d{1,2}[\/-]\d{1,2}[\/-](20\d{2})|(20\d{2})[\/-]\d{1,2}[\/-]\d{1,2}/gi;
+  const matches = text.match(datePattern);
+  if (matches) {
+    for (const match of matches) {
+      const parsedDate = new Date(match.replace(/(st|nd|rd|th)/, ''));
+      if (!isNaN(parsedDate.getTime()) && parsedDate < jan2026) {
+        return true;
+      }
+    }
+  }
+
+  return false; // Assumed 2026 or newer if no date found
+}
+
 function parseNewsItems(html, source) {
   const $ = cheerio.load(html);
   const items = [];
 
   $("a").each((_, anchor) => {
+    const parentText = normalizeText($(anchor).parent().text() || "");
     const title = normalizeText($(anchor).text() || "");
     const href = $(anchor).attr("href");
 
     if (!title || title.length < 20 || !href) {
+      return;
+    }
+
+    // Exclude anything strictly from before Jan 2026
+    if (isBeforeJan2026(title) || isBeforeJan2026(parentText)) {
       return;
     }
 
@@ -119,7 +154,13 @@ function parseNewsItems(html, source) {
       lower.includes("test") ||
       lower.includes("date sheet") ||
       lower.includes("news") ||
-      lower.includes("announcement");
+      lower.includes("announcement") ||
+      lower.includes("bsc") ||
+      lower.includes("msc") ||
+      lower.includes("phd") ||
+      lower.includes("bs") ||
+      lower.includes("ms ") ||
+      lower.includes("requirement");
 
     if (!looksLikeNews) {
       return;

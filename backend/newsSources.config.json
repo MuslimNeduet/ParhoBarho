@@ -1,9 +1,16 @@
 {
   "generic": [
     { "key": "hec", "name": "HEC Pakistan", "url": "https://www.hec.gov.pk/english/news/Pages/default.aspx" },
-    { "key": "bsek", "name": "BSEK Karachi (Matric)", "url": "https://www.bsek.edu.pk/News" },
+    { "key": "pec", "name": "PEC (Engineering Council)", "url": "https://www.pec.org.pk/news-announcements/" },
+    { "key": "pmdc", "name": "PMDC (Medical Council)", "url": "https://www.pmdc.pk/News" },
+    { "key": "navttc", "name": "NAVTTC (Technical Training)", "url": "https://navttc.gov.pk/category/news/" },
     { "key": "biek", "name": "BIEK Karachi (Inter)", "url": "https://www.biek.edu.pk/News" },
-    { "key": "pmdc", "name": "PMDC (Medical)", "url": "https://www.pmdc.pk/News" }
+    { "key": "bsek", "name": "BSEK Karachi (Matric)", "url": "https://www.bsek.edu.pk/News" },
+    { "key": "fbise", "name": "Federal Board (FBISE)", "url": "https://www.fbise.edu.pk/news-updates" },
+    { "key": "biselahore", "name": "BISE Lahore", "url": "https://www.biselahore.com/notif.html" },
+    { "key": "bisebwp", "name": "BISE Bahawalpur", "url": "https://www.bisebwp.edu.pk/" },
+    { "key": "bisepeshawar", "name": "BISE Peshawar", "url": "https://www.bisep.edu.pk/news-updates/" },
+    { "key": "bbiseqta", "name": "BBISE Quetta", "url": "https://www.bbiseqta.edu.pk/news/" }
   ],
   "universities": [
     { "key": "neduet", "name": "NED University", "url": "https://www.neduet.edu.pk/content/news" },
@@ -12,24 +19,20 @@
     { "key": "pafkiet", "name": "PAF-KIET", "url": "https://kiet.edu.pk/category/news/" },
     { "key": "iba", "name": "IBA Karachi", "url": "https://www.iba.edu.pk/news.php" },
     { "key": "duhs", "name": "Dow University", "url": "https://www.duhs.edu.pk/category/news/" },
-    
     { "key": "lums", "name": "LUMS", "url": "https://lums.edu.pk/news" },
     { "key": "pu", "name": "Punjab University", "url": "https://pu.edu.pk/home/section/exam/" },
     { "key": "uetl", "name": "UET Lahore", "url": "https://www.uet.edu.pk/news-and-events" },
-    
     { "key": "nust", "name": "NUST Islamabad", "url": "https://nust.edu.pk/news/" },
     { "key": "fast", "name": "FAST-NUCES", "url": "https://nu.edu.pk/News" },
     { "key": "pieas", "name": "PIEAS", "url": "https://www.pieas.edu.pk/proclaims-grid.cshtml?type=NEWS" },
-    
-
     { "key": "giki", "name": "GIKI Topi", "url": "https://giki.edu.pk/news-events/" },
     { "key": "buitems", "name": "BUITEMS Quetta", "url": "https://www.buitms.edu.pk/News/" }
   ],
   "competitive": [
     { "key": "fpsc", "name": "FPSC (Federal)", "url": "https://www.fpsc.gov.pk/" },
-    { "key": "ppsc", "name": "PPSC (Punjab)", "url": "https://www.ppsc.gop.pk/" },
     { "key": "spsc", "name": "SPSC (Sindh)", "url": "https://spsc.gos.pk/" },
-    { "key": "kppsc", "name": "KPPSC (Khyber Pakhtunkhwa)", "url": "https://www.kppsc.gov.pk/" },
+    { "key": "ppsc", "name": "PPSC (Punjab)", "url": "https://www.ppsc.gop.pk/" },
+    { "key": "kppsc", "name": "KPPSC (KPK)", "url": "https://www.kppsc.gov.pk/" },
     { "key": "bpsc", "name": "BPSC (Balochistan)", "url": "https://bpsc.gob.pk/" }
   ]
 }

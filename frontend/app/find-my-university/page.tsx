@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Sparkles, Send, RefreshCcw, User, Bot, Info } from "lucide-react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
@@ -19,6 +19,15 @@ export default function FindMyUniversityPage() {
   ]);
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory, thinking]);
 
   const apiMessages = useMemo(
     () =>
@@ -63,9 +72,9 @@ export default function FindMyUniversityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col">
-      <main className="flex-1 flex flex-col items-center justify-center p-6">
-        <div className="w-full max-w-4xl flex flex-col h-[80vh] bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/5">
+    <div className="h-[calc(100vh-64px)] bg-[#050505] text-white flex flex-col overflow-hidden">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 w-full h-full">
+        <div className="w-full max-w-4xl flex flex-col flex-1 bg-white/[0.02] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/5">
           <div className="p-6 border-b border-white/10 flex items-center justify-between bg-white/[0.01]">
             <div className="flex items-center gap-4">
               <div className="bg-blue-600 p-2.5 rounded-xl">
@@ -87,7 +96,7 @@ export default function FindMyUniversityPage() {
             </button>
           </div>
 
-          <div className="flex-1 p-8 space-y-8 overflow-y-auto scrollbar-hide">
+          <div className="flex-1 p-4 sm:p-8 space-y-8 overflow-y-auto scrollbar-hide no-scrollbar flex flex-col justify-start">
             {error ? (
               <div className="rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
                 {error}
@@ -125,6 +134,7 @@ export default function FindMyUniversityPage() {
                 </div>
               </div>
             ) : null}
+            <div ref={messagesEndRef} className="h-4 w-full shrink-0" />
           </div>
 
           <div className="p-8 bg-white/[0.01] border-t border-white/10">
